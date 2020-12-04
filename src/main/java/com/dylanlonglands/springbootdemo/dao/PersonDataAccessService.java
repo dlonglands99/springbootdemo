@@ -11,18 +11,18 @@ import java.util.UUID;
 @Repository("postgres")
 public class PersonDataAccessService implements PersonDao {
     @Override
-    public int insertPerson(UUID id, Person person) {
-        return 0;
+    public String insertPerson(UUID id, Person person) {
+        return "";
     }
 
     @Override
-    public int deletePerson(UUID id) {
-        return 0;
+    public String deletePerson(UUID id) {
+        return "";
     }
 
     @Override
-    public int updatePerson(UUID id, Person person) {
-        return 0;
+    public String updatePerson(UUID id, Person person) {
+        return "";
     }
 
     @Override

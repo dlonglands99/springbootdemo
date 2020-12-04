@@ -14,33 +14,33 @@ public class FakePersonDataAccessService implements PersonDao {
     private static List<Person> db = new ArrayList<>();
 
     @Override
-    public int insertPerson(UUID id, Person person) {
+    public String insertPerson(UUID id, Person person) {
         db.add(new Person(id, person.getName()));
-        return 1;
+        return "User successfully saved";
     }
 
     @Override
-    public int deletePerson(UUID id) {
+    public String deletePerson(UUID id) {
         Optional<Person> person = selectPersonById(id);
         if (person.isPresent()) {
             db.remove(person.get());
-            return 1;
+            return "User successfullly removed";
         }
-        return 0;
+        return "User does not exist";
     }
 
     @Override
-    public int updatePerson(UUID id, Person newPerson) {
+    public String updatePerson(UUID id, Person newPerson) {
         return selectPersonById(id)
                 .map(currentPerson -> {
                     int indexOfPersonToUpdate = db.indexOf(currentPerson);
                     if (indexOfPersonToUpdate >= 0) {
                         db.set(indexOfPersonToUpdate, newPerson);
-                        return 1;
+                        return "User successfully updated";
                     }
-                    return 0;
+                    return "User not found";
                 })
-                .orElse(0);
+                .orElse("User not found");
     }
 
     @Override
