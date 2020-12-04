@@ -21,7 +21,7 @@ public class PersonService {
     }
 
     public int insertPerson(Person person) {
-        return  personDao.insertPerson(person);
+        return personDao.insertPerson(person);
     }
 
     public List<Person> getPeople() {
