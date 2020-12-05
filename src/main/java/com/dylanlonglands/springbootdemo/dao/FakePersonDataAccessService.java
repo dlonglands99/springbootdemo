@@ -54,4 +54,15 @@ public class FakePersonDataAccessService implements PersonDao {
     public List<Person> getPeople() {
         return db;
     }
+
+    @Override
+    public List<Person> getPeopleByName(String name) {
+        List<Person> listToReturn = new ArrayList<>();
+        for (Person person : db) {
+            if (person.getName().contains(name)) {
+                listToReturn.add(person);
+            }
+        }
+        return listToReturn;
+    }
 }

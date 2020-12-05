@@ -18,6 +18,8 @@ public interface PersonDao {
 
     List<Person> getPeople();
 
+    List<Person> getPeopleByName(String name);
+
     default String insertPerson(Person person) {
         UUID id = UUID.randomUUID();
         return insertPerson(id, person);

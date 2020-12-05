@@ -39,4 +39,6 @@ public class PersonService {
     public String updatePerson(UUID id, Person person) {
         return personDao.updatePerson(id, person);
     }
+
+    public List<Person> getPeopleByName(String name) { return personDao.getPeopleByName(name);}
 }

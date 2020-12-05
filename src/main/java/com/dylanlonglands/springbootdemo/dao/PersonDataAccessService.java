@@ -37,4 +37,9 @@ public class PersonDataAccessService implements PersonDao {
         list.add(postgres);
         return list;
     }
+
+    @Override
+    public List<Person> getPeopleByName(String name) {
+        return null;
+    }
 }
