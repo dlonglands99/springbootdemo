@@ -23,24 +23,30 @@ public class PersonDataAccessService implements PersonDao {
 
     @Override
     public String insertPerson(UUID id, Person person) {
-        return "";
+        final String sql = "INSERT INTO person (id, name) VALUES(?, ?)";
+        jdbcTemplate.update(sql, new Object[]{id, person.getName()});
+        return "User successfully added to postgres db";
     }
 
     @Override
     public String deletePerson(UUID id) {
-        return "";
+        final String sql = "DELETE FROM person WHERE id = ?";
+        jdbcTemplate.update(sql, new Object[]{id});
+        return "User successfully deleted";
     }
 
     @Override
     public String updatePerson(UUID id, Person person) {
-        return "";
+        final String sql = "UPDATE person SET name = ? WHERE id = ?";
+        jdbcTemplate.update(sql, new Object[]{person.getName(), id});
+        return "User successfully updated";
     }
 
     @Override
     public Optional<Person> selectPersonById(UUID id) {
-        final String selectQuery = "SELECT id, name FROM person WHERE id = ?";
+        final String sql = "SELECT id, name FROM person WHERE id = ?";
         Person person = jdbcTemplate.queryForObject(
-                selectQuery,
+                sql,
                 new Object[]{id},
                 new int[] {Types.OTHER},
                 (resultSet, i) -> {
@@ -53,16 +59,19 @@ public class PersonDataAccessService implements PersonDao {
 
     @Override
     public List<Person> getPeople() {
-        final String selectQuery = "SELECT id, name FROM person;";
-        return jdbcTemplate.query(selectQuery, (resultSet, i) -> {
+        final String sql = "SELECT id, name FROM person";
+        return jdbcTemplate.query(sql, (resultSet, i) -> {
             final UUID id = UUID.fromString(resultSet.getString("id"));
             final String name = resultSet.getString("name");
             return new Person(id, name);
         });
     }
 
+    //TODO: implement this method
     @Override
     public List<Person> getPeopleByName(String name) {
-        return null;
+        final String sql = "SELECT id, name FROM person WHERE name LIKE ?";
+        final List<Person> peopleWithName = new ArrayList<>();
+        return peopleWithName;
     }
 }
