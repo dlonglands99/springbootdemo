@@ -24,7 +24,7 @@ public class FakePersonDataAccessService implements PersonDao {
         Optional<Person> person = selectPersonById(id);
         if (person.isPresent()) {
             db.remove(person.get());
-            return "User successfullly removed";
+            return "User successfully removed";
         }
         return "User does not exist";
     }
